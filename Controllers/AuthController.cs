@@ -108,7 +108,18 @@ public class AuthController : Controller
             return View(model);
         }
 
-        _ = Task.Run(() => _email.SendVerificationEmailAsync(model.Email, token));
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                await _email.SendVerificationEmailAsync(model.Email, token);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"EMAIL SEND FAILED: {ex.Message}");
+                Console.WriteLine(ex.StackTrace);
+            }
+        });
 
         model.SuccessMessage = "Registration successful! Check your email to verify your account.";
         return View(model);
