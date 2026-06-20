@@ -30,7 +30,7 @@ public class EmailService
         };
 
         using var client = new SmtpClient();
-        await client.ConnectAsync(_settings.Host, _settings.Port, SecureSocketOptions.StartTls);
+        await client.ConnectAsync(_settings.Host, _settings.Port, SecureSocketOptions.SslOnConnect);
         await client.AuthenticateAsync(_settings.User, _settings.Password);
         await client.SendAsync(message);
         await client.DisconnectAsync(true);
