@@ -25,7 +25,7 @@ var emailUser     = Environment.GetEnvironmentVariable("EMAIL_USER") ?? "";
 
 builder.Services.AddSingleton(new EmailSettings
 {
-    Host     = builder.Configuration["Smtp:Host"] ?? "smtp.gmail.com",
+    Host     = builder.Configuration["Smtp:Host"] ?? "smtp-relay.brevo.com",
     Port     = int.Parse(builder.Configuration["Smtp:Port"] ?? "587"),
     User     = emailUser,
     Password = emailPassword,
